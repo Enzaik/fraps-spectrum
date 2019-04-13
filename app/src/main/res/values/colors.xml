@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#375CE0</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorSelected">#E7EEFD</color>
+    <color name="headerAccentColor">#000000</color>
+    <color name="colorBalance">#43a047</color>
+    <color name="colorPerformance">#F9B63D</color>
+    <color name="colorBattery">#506BEE</color>
+    <color name="colorGaming">#FD0040</color>
+    <color name="colorTextWhite">#FFFFFF</color>
+    <color name="splash_background">#FFFFFF</color>
+</resources>
