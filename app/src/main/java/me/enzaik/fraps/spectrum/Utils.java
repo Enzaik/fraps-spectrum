@@ -27,6 +27,8 @@ class Utils {
 
     public static String profileProp = "persist.spectrum.profile";
 
+    public static String modeProp = "persist.spectrum.mode";
+
     public static String kernelProp = "persist.spectrum.kernel";
 
     public static String kpmPropPath = "/proc/kpm_name";
@@ -87,6 +89,17 @@ class Utils {
         }
     }
 
+    public static void setMode(int mode) {
+        int numProfiles = 3;
+        if (mode > numProfiles || mode < 0) {
+            setMod(0);
+        } else {
+            setMod(mode);
+        }
+    }
+
+
+
     // Method that sets system property
     private static void setProp(final int profile) {
         new Thread(new Runnable() {
@@ -100,6 +113,20 @@ class Utils {
             }
         }).start();
     }
+
+    private static void setMod(final int mode) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(KPM) {
+                    Shell.SU.run(String.format("echo %s > %s", mode, kpmPath));
+                } else {
+                    Shell.SU.run(String.format("setprop %s %s", modeProp, mode));
+                }
+            }
+        }).start();
+    }
+
 
     public static String disabledProfiles(){
         String disabledProfilesProp = "spectrum.disabledprofiles";

@@ -12,6 +12,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -44,7 +46,9 @@ import static  me.enzaik.fraps.spectrum.Utils.kpmPropPath;
 import static  me.enzaik.fraps.spectrum.Utils.listToString;
 import static  me.enzaik.fraps.spectrum.Utils.notTunedGov;
 import static  me.enzaik.fraps.spectrum.Utils.profileProp;
+import static  me.enzaik.fraps.spectrum.Utils.modeProp;
 import static  me.enzaik.fraps.spectrum.Utils.setProfile;
+import static  me.enzaik.fraps.spectrum.Utils.setMode;
 
 
 public class MainActivity extends AppCompatActivity
@@ -53,15 +57,49 @@ public class MainActivity extends AppCompatActivity
     private CardView oldCard;
     private TextView oldText;
     private List<String> suResult = null;
+    private List<String> suModeResult = null;
     private int notaneasteregg = 0;
     private static final int PERMISSIONS_REQUEST = 0;
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        //----------------Modes Listener----------------------------------
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.mode0:
+                    Toast.makeText(getApplicationContext(),
+                            "A",
+                            Toast.LENGTH_SHORT).show();
+                    setMode(0);
+                    return true;
+                case R.id.mode1:
+                    Toast.makeText(getApplicationContext(),
+                            "B",
+                            Toast.LENGTH_SHORT).show();
+                    setMode(1);
+                    return true;
+                case R.id.mode2:
+                    Toast.makeText(getApplicationContext(),
+                            "C",
+                            Toast.LENGTH_SHORT).show();
+                    setMode(2);
+                    return true;
+
+            }
+            return false;
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //------------------------------------------------
+
         final CardView card0 = (CardView) findViewById(R.id.card0);
         final CardView card1 = (CardView) findViewById(R.id.card1);
         final CardView card2 = (CardView) findViewById(R.id.card2);
@@ -70,6 +108,9 @@ public class MainActivity extends AppCompatActivity
         final TextView desc1 = (TextView) findViewById(R.id.desc1);
         final TextView desc2 = (TextView) findViewById(R.id.desc2);
         final TextView desc3 = (TextView) findViewById(R.id.desc3);
+        MenuItem mode0 = (MenuItem) findViewById(R.id.mode0);
+        MenuItem mode1 = (MenuItem) findViewById(R.id.mode1);
+        MenuItem mode2 = (MenuItem) findViewById(R.id.mode2);
         final int balColor = ContextCompat.getColor(this, R.color.colorBalance);
         final int perColor = ContextCompat.getColor(this, R.color.colorPerformance);
         final int batColor = ContextCompat.getColor(this, R.color.colorBattery);
@@ -192,7 +233,10 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //--
+        //Modes listeners
+
+
+
 
 
 
@@ -212,6 +256,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
 
@@ -221,15 +267,20 @@ public class MainActivity extends AppCompatActivity
     private void initSelected() {
         SharedPreferences profile = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = profile.edit();
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+
 
         if(KPM) {
             suResult = Shell.SU.run(String.format("cat %s", kpmPath));
         } else {
             suResult = Shell.SU.run(String.format("getprop %s", profileProp));
+            suModeResult = Shell.SU.run(String.format("getprop %s", modeProp));
+
         }
 
         if (suResult != null) {
             String result = listToString(suResult);
+
 
             if(result.contains("-1")) {
                 // Default KPM value, just in case
@@ -278,6 +329,54 @@ public class MainActivity extends AppCompatActivity
                 editor.apply();
             }
         }
+        //---------init Mode------------
+        if (suModeResult != null){
+            String modeResult = listToString(suModeResult);
+            switch (modeResult){
+                case "-1":
+                    Toast.makeText(getApplicationContext(),
+                            "-1",
+                            Toast.LENGTH_SHORT).show();
+                    editor.putString("mode", "secure");
+                    editor.apply();
+                    return;
+                case "0":
+                    Toast.makeText(getApplicationContext(),
+                            "A",
+                            Toast.LENGTH_SHORT).show();
+                    editor.putString("mode", "secure");
+                    editor.apply();
+                    navigation.setSelectedItemId(R.id.mode0);
+
+                    return;
+
+                case "1":
+                    Toast.makeText(getApplicationContext(),
+                            "B",
+                            Toast.LENGTH_SHORT).show();
+                    editor.putString("mode", "advanced");
+                    editor.apply();
+                    navigation.setSelectedItemId(R.id.mode1);
+
+                    return;
+                case "2":
+                    Toast.makeText(getApplicationContext(),
+                            "C",
+                            Toast.LENGTH_SHORT).show();
+                    editor.putString("mode", "agressive");
+                    editor.apply();
+                    navigation.setSelectedItemId(R.id.mode2);
+
+                    return;
+                default:
+                    Toast.makeText(getApplicationContext(),
+                            "default",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+
+            }
+
+        }
     }
 
     // Method that reads and sets profile descriptions
@@ -293,6 +392,8 @@ public class MainActivity extends AppCompatActivity
             suResult = Shell.SU.run(String.format("cat %s", kpmPropPath));
         } else {
             suResult = Shell.SU.run(String.format("getprop %s", kernelProp));
+            suModeResult = Shell.SU.run(String.format("getprop %s", modeProp));
+
         }
         kernel = listToString(suResult);
         if (kernel.isEmpty())
@@ -382,20 +483,7 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -403,7 +491,10 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.mode1) {
+            Toast.makeText(getApplicationContext(),
+                    "This is a message displayed in a Toast",
+                    Toast.LENGTH_SHORT).show();
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -422,3 +513,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 }
+
