@@ -48,6 +48,7 @@
 
     <!-- Profile Tile -->
     <string name="profileTile">Profile</string>
+    <string name="modeTile">Mode</string>
 
     <!-- Shared Preferences -->
     <string name="profile" translatable="false" />
