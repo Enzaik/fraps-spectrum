@@ -68,27 +68,33 @@ public class MainActivity extends AppCompatActivity
         //----------------Modes Listener----------------------------------
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+
             switch (item.getItemId()) {
                 case R.id.mode0:
                     Toast.makeText(getApplicationContext(),
                             "A",
                             Toast.LENGTH_SHORT).show();
                     setMode(0);
+                    clickMode("secure");
                     return true;
                 case R.id.mode1:
                     Toast.makeText(getApplicationContext(),
                             "B",
                             Toast.LENGTH_SHORT).show();
                     setMode(1);
+                    clickMode("advanced");
                     return true;
                 case R.id.mode2:
                     Toast.makeText(getApplicationContext(),
                             "C",
                             Toast.LENGTH_SHORT).show();
                     setMode(2);
+                    clickMode("agressive");
                     return true;
 
             }
+
             return false;
         }
     };
@@ -435,6 +441,13 @@ public class MainActivity extends AppCompatActivity
             editor.putString("profile", String.valueOf(prof));
             editor.apply();
         }
+    }
+
+    private void clickMode(String mode){
+        SharedPreferences profile = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = profile.edit();
+        editor.putString("mode", mode);
+        editor.apply();
     }
 
 
