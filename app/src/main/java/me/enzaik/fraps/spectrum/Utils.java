@@ -105,9 +105,7 @@ class Utils {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if(KPM) {
-                    Shell.SU.run(String.format("echo %s > %s", profile, kpmPath));
-                } else {
+ {
                     Shell.SU.run(String.format("setprop %s %s", profileProp, profile));
                 }
             }
@@ -118,9 +116,7 @@ class Utils {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if(KPM) {
-                    Shell.SU.run(String.format("echo %s > %s", mode, kpmPath));
-                } else {
+{
                     Shell.SU.run(String.format("setprop %s %s", modeProp, mode));
                 }
             }
