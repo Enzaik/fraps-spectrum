@@ -79,22 +79,22 @@ public class ProfileTile extends TileService {
         String newLabel;
         int newState = Tile.STATE_ACTIVE;
         ArrayList<String> disabledProfilesList = new ArrayList<>();
-        disabledProfilesList.addAll(Arrays.asList(Utils.disabledProfiles().split(",")));
+  //      disabledProfilesList.addAll(Arrays.asList(Utils.disabledProfiles().split(",")));
 
         // Update tile
-        if (profile.contains("3") || profile.contains("gaming") && !disabledProfilesList.contains(profile)) {
+        if (profile.contains("3") || profile.contains("gaming") ) {
             newLabel = "Gaming";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.game);
             click = false;
-        } else if (profile.contains("2") || profile.contains("battery") && !disabledProfilesList.contains(profile)) {
+        } else if (profile.contains("2") || profile.contains("battery") ) {
             newLabel = "Battery";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.battery);
             click = true;
-        } else if (profile.contains("1") || profile.contains("performance") && !disabledProfilesList.contains(profile)){
+        } else if (profile.contains("1") || profile.contains("performance") ){
             newLabel = "Performance";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.rocket);
             click = true;
-        } else if (profile.contains("0") || profile.contains("balanced") && !disabledProfilesList.contains(profile)) {
+        } else if (profile.contains("0") || profile.contains("balanced") ) {
             newLabel = "Balance";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.atom);
             click = false;
