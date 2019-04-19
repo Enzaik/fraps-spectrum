@@ -7,11 +7,19 @@ import android.graphics.drawable.Icon;
 import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
+import android.view.View;
+import android.widget.Toast;
 
 import com.ruesga.preferences.MultiProcessSharedPreferencesProvider;
 
+import static me.enzaik.fraps.spectrum.Utils.listToString;
+import static me.enzaik.fraps.spectrum.Utils.modeProp;
+import static me.enzaik.fraps.spectrum.Utils.modeSuppProp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import eu.chainfire.libsuperuser.Shell;
 
 @TargetApi(Build.VERSION_CODES.N)
 
@@ -19,6 +27,7 @@ public class ModeTile extends TileService {
     private static final String SERVICE_STATUS_FLAG = "serviceStatus";
     private static final String PREFERENCES_KEY = "me.enzaik.fraps.spectrum";
     private boolean click = false;
+    private  List<String> suModeResult = null;
     private boolean marker = false;
 
     @Override
@@ -60,6 +69,8 @@ public class ModeTile extends TileService {
     }
 
     private boolean getServiceStatus() {
+
+
         SharedPreferences prefs = getApplicationContext().getSharedPreferences(PREFERENCES_KEY, MODE_PRIVATE);
         boolean isActive = prefs.getBoolean(SERVICE_STATUS_FLAG, false);
         isActive = !isActive;
@@ -70,13 +81,35 @@ public class ModeTile extends TileService {
     }
 
     private void updateTile() {
+
+        suModeResult = Shell.SU.run(String.format("getprop %s", modeSuppProp));
+
+        String mode_sup = listToString(suModeResult);
+        Icon newIcon;
+        String newLabel;
         String mode = MultiProcessSharedPreferencesProvider
                 .getSharedPreferences(getApplicationContext(), "profile")
                 .getString("mode", "");
         Tile tile = this.getQsTile();
-        Icon newIcon;
-        String newLabel;
+
         int newState = Tile.STATE_ACTIVE;
+
+
+        if(!mode_sup.contains("1")){
+
+            Toast.makeText(getApplicationContext(), "No Mode support", Toast.LENGTH_SHORT).show();
+            newLabel = "No support";
+            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_mono);
+            click = false;
+            tile.setLabel(newLabel);
+            tile.setIcon(newIcon);
+            tile.setState(newState);
+            tile.updateTile();
+            return;
+
+        }
+
+
         //ArrayList<String> disabledProfilesList = new ArrayList<>();
        // disabledProfilesList.addAll(Arrays.asList(Utils.disabledProfiles().split(",")));
 
@@ -96,7 +129,7 @@ public class ModeTile extends TileService {
             click = false;
             marker = false;
         } else {
-            newLabel = "Custom";
+            newLabel = "No support";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_mono);
             click = false;
         }
