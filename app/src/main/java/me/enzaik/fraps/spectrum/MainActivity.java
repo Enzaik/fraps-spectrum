@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity
         final TextView desc1 = (TextView) findViewById(R.id.desc1);
         final TextView desc2 = (TextView) findViewById(R.id.desc2);
         final TextView desc3 = (TextView) findViewById(R.id.desc3);
+        final TextView kernelView = (TextView) findViewById(R.id.kernel_name);
 
         final int balColor = ContextCompat.getColor(this, R.color.colorBalance);
         final int perColor = ContextCompat.getColor(this, R.color.colorPerformance);
@@ -389,8 +390,11 @@ public class MainActivity extends AppCompatActivity
         TextView desc1 = (TextView) findViewById(R.id.desc1);
         TextView desc2 = (TextView) findViewById(R.id.desc2);
         TextView desc3 = (TextView) findViewById(R.id.desc3);
+
         String balDesc;
         String kernel;
+
+
 
         if(KPM){
             suResult = Shell.SU.run(String.format("cat %s", kpmPropPath));
@@ -398,8 +402,11 @@ public class MainActivity extends AppCompatActivity
             suResult = Shell.SU.run(String.format("getprop %s", kernelProp));
             suModeResult = Shell.SU.run(String.format("getprop %s", modeProp));
 
+
         }
         kernel = listToString(suResult);
+        kernel = listToString(suResult);
+
         if (kernel.isEmpty())
             return;
         balDesc = desc0.getText().toString();
@@ -491,6 +498,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        TextView kernelView = (TextView) findViewById(R.id.kernel_name);
+        suResult = Shell.SU.run(String.format("getprop %s", kernelProp));
+        String kernel_name = listToString(suResult);
+        kernelView.setText(kernel_name);
         return true;
     }
 
@@ -507,15 +518,7 @@ public class MainActivity extends AppCompatActivity
                     "This is a message displayed in a Toast",
                     Toast.LENGTH_SHORT).show();
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        }  else if (id == R.id.nav_share) {
 
         }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Spectrum</string>
+    <string name="app_name">Spectrum Extended</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -62,6 +62,15 @@
 
 
     <string name="action_example">Example action</string>
+    <string name="communicate">Communicate</string>
+    <string name="importt">Import</string>
+    <string name="share">Share</string>
+    <string name="gallery">Gallery</string>
+    <string name="slideshow">Slideshow</string>
+    <string name="send">Send</string>
+    <string name="tools">Tools</string>
+    <string name="kernel_name">kernel</string>
+    <string name="spectrum_extended">Spectrum Extended</string>
 
 
 </resources>

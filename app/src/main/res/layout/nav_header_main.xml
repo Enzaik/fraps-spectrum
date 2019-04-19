@@ -13,11 +13,23 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/spectrum_text"
         android:layout_width="match_parent"
         android:layout_height="40sp"
+        android:fontFamily="@font/googlesans_medium"
+        android:text="@string/spectrum_extended"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/kernel_name"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
         android:fontFamily="@font/googlesans_bold"
-        android:text="First Drawer"
+        android:text="@string/kernel_name"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
+
 </LinearLayout>

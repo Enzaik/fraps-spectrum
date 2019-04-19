@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/mode0"
-        android:icon="@drawable/ic_outline_verified_user_24px"
+        android:icon="@drawable/ic_outline_local_florist_24px"
         android:title="Secure" />
 
     <item
@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/mode2"
-        android:icon="@drawable/ic_outline_warning_24px"
+        android:icon="@drawable/ic_outline_offline_bolt_24px"
         android:title="Agressive" />
 
 </menu>
