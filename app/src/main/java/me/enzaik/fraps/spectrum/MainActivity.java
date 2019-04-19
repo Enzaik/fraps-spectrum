@@ -12,6 +12,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
+import android.support.design.internal.BottomNavigationMenu;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -47,6 +50,7 @@ import static  me.enzaik.fraps.spectrum.Utils.listToString;
 import static  me.enzaik.fraps.spectrum.Utils.notTunedGov;
 import static  me.enzaik.fraps.spectrum.Utils.profileProp;
 import static  me.enzaik.fraps.spectrum.Utils.modeProp;
+import static  me.enzaik.fraps.spectrum.Utils.modeSuppProp;
 import static  me.enzaik.fraps.spectrum.Utils.modelProp;
 import static  me.enzaik.fraps.spectrum.Utils.vendorProp;
 import static  me.enzaik.fraps.spectrum.Utils.setProfile;
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity
     private List<String> suModeResult = null;
     private List<String> suVendorResult = null;
     private List<String> suModelResult = null;
+    private List<String> suModeSupResult = null;
     private int notaneasteregg = 0;
     private static final int PERMISSIONS_REQUEST = 0;
 
@@ -126,6 +131,9 @@ public class MainActivity extends AppCompatActivity
         final int gamColor = ContextCompat.getColor(this, R.color.colorGaming);
 
         final int textWhiteColor = ContextCompat.getColor(this, R.color.colorTextWhite);
+        final BottomNavigationItemView nav0 = (BottomNavigationItemView) findViewById(R.id.mode0);
+
+
 
         // Check for Spectrum Support
         if (!checkSupport(this)) {
@@ -279,6 +287,14 @@ public class MainActivity extends AppCompatActivity
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
 
 
+        suModeSupResult = Shell.SU.run(String.format("getprop %s", modeSuppProp));
+        String mode_sup = listToString(suModeSupResult);
+        if(!mode_sup.contains("1")){
+            navigation.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(), "No Mode support", Toast.LENGTH_SHORT).show();
+
+        }
+
         if(KPM) {
             suResult = Shell.SU.run(String.format("cat %s", kpmPath));
         } else {
@@ -394,6 +410,8 @@ public class MainActivity extends AppCompatActivity
         TextView desc1 = (TextView) findViewById(R.id.desc1);
         TextView desc2 = (TextView) findViewById(R.id.desc2);
         TextView desc3 = (TextView) findViewById(R.id.desc3);
+
+
 
         String balDesc;
         String kernel;
