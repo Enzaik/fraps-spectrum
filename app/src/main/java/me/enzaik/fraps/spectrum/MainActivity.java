@@ -114,9 +114,7 @@ public class MainActivity extends AppCompatActivity
         final TextView desc1 = (TextView) findViewById(R.id.desc1);
         final TextView desc2 = (TextView) findViewById(R.id.desc2);
         final TextView desc3 = (TextView) findViewById(R.id.desc3);
-        MenuItem mode0 = (MenuItem) findViewById(R.id.mode0);
-        MenuItem mode1 = (MenuItem) findViewById(R.id.mode1);
-        MenuItem mode2 = (MenuItem) findViewById(R.id.mode2);
+
         final int balColor = ContextCompat.getColor(this, R.color.colorBalance);
         final int perColor = ContextCompat.getColor(this, R.color.colorPerformance);
         final int batColor = ContextCompat.getColor(this, R.color.colorBattery);
