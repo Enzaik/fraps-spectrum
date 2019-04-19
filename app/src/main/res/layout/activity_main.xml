@@ -21,10 +21,11 @@
         android:layout_gravity="start"
         android:background="@color/colorTextWhite"
         android:fitsSystemWindows="true"
+        android:foregroundTint="@color/headerAccentColor"
         android:paddingTop="80sp"
         android:textAlignment="center"
         app:headerLayout="@layout/nav_header_main"
-        app:itemIconTint="@color/colorTextWhite"
+        app:itemIconTint="@color/headerAccentColor"
         app:itemTextColor="@color/headerAccentColor"
         app:menu="@menu/activity_main_drawer" />
 
