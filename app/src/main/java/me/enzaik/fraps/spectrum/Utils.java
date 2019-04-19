@@ -29,7 +29,7 @@ class Utils {
 
     public static String modeProp = "persist.spectrum.mode";
 
-    public static String modeSuppProp = "persist.spectrum.mode.support";
+    public static String modeSuppProp = "spectrum.mode.support";
 
     public static String kernelProp = "persist.spectrum.kernel";
 

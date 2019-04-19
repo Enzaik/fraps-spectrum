@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity
     private List<String> suVendorResult = null;
     private List<String> suModelResult = null;
     private List<String> suModeSupResult = null;
+    private List<String> suProfileResult = null;
     private int notaneasteregg = 0;
     private static final int PERMISSIONS_REQUEST = 0;
 
@@ -288,6 +289,10 @@ public class MainActivity extends AppCompatActivity
 
 
         suModeSupResult = Shell.SU.run(String.format("getprop %s", modeSuppProp));
+        suProfileResult = Shell.SU.run(String.format("getprop %s", profileProp));
+        if (suProfileResult == null){
+            Shell.SU.run("setprop persist.spectrum.profile 0");
+        }
         String mode_sup = listToString(suModeSupResult);
         if(!mode_sup.contains("1")){
             navigation.setVisibility(View.INVISIBLE);
@@ -426,7 +431,6 @@ public class MainActivity extends AppCompatActivity
 
 
         }
-        kernel = listToString(suResult);
         kernel = listToString(suResult);
 
         if (kernel.isEmpty())
