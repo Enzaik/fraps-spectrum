@@ -31,6 +31,10 @@ class Utils {
 
     public static String kernelProp = "persist.spectrum.kernel";
 
+    public static String modelProp = "ro.product.vendor.model";
+
+    public static String vendorProp = "ro.product.vendor.manufacturer";
+
     public static String kpmPropPath = "/proc/kpm_name";
 
     public static Boolean KPM;

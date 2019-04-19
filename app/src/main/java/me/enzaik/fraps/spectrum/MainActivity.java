@@ -47,6 +47,8 @@ import static  me.enzaik.fraps.spectrum.Utils.listToString;
 import static  me.enzaik.fraps.spectrum.Utils.notTunedGov;
 import static  me.enzaik.fraps.spectrum.Utils.profileProp;
 import static  me.enzaik.fraps.spectrum.Utils.modeProp;
+import static  me.enzaik.fraps.spectrum.Utils.modelProp;
+import static  me.enzaik.fraps.spectrum.Utils.vendorProp;
 import static  me.enzaik.fraps.spectrum.Utils.setProfile;
 import static  me.enzaik.fraps.spectrum.Utils.setMode;
 
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity
     private TextView oldText;
     private List<String> suResult = null;
     private List<String> suModeResult = null;
+    private List<String> suVendorResult = null;
+    private List<String> suModelResult = null;
     private int notaneasteregg = 0;
     private static final int PERMISSIONS_REQUEST = 0;
 
@@ -499,9 +503,17 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         TextView kernelView = (TextView) findViewById(R.id.kernel_name);
+        TextView modelView = (TextView) findViewById(R.id.model);
+        TextView vendorView = (TextView) findViewById(R.id.manufacturer);
         suResult = Shell.SU.run(String.format("getprop %s", kernelProp));
+        suModelResult = Shell.SU.run(String.format("getprop %s", modelProp));
+        suVendorResult = Shell.SU.run(String.format("getprop %s", vendorProp));
         String kernel_name = listToString(suResult);
+        String model_name = listToString(suModelResult);
+        String vendor_name = listToString(suVendorResult);
         kernelView.setText(kernel_name);
+        modelView.setText(model_name);
+        vendorView.setText(vendor_name);
         return true;
     }
 

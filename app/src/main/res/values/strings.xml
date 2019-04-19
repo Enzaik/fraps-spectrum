@@ -71,6 +71,8 @@
     <string name="tools">Tools</string>
     <string name="kernel_name">kernel</string>
     <string name="spectrum_extended">Spectrum Extended</string>
+    <string name="vendor">Vendor</string>
+    <string name="model">Model</string>
 
 
 </resources>
