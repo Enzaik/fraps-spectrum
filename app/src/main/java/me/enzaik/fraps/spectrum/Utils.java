@@ -35,6 +35,29 @@ class Utils {
 
     public static String modelProp = "ro.product.vendor.model";
 
+//--------profile info-----
+    public static String balanceNameProp = "persist.spectrum.balance";
+
+    public static String balanceAuthorProp = "persist.spectrum.balance.author";
+
+
+    public static String performanceNameProp = "persist.spectrum.performance";
+
+    public static String performanceAuthorProp = "persist.spectrum.performance.author";
+
+
+    public static String batteryNameProp = "persist.spectrum.battery";
+
+    public static String batteryAuthorProp = "persist.spectrum.battery.author";
+
+
+    public static String gamingNameProp = "persist.spectrum.gaming";
+
+    public static String gamingAuthorProp = "persist.spectrum.gaming.author";
+
+
+//---------------------------------------------------------------------------
+
     public static String vendorProp = "ro.product.vendor.manufacturer";
 
     public static String kpmPropPath = "/proc/kpm_name";

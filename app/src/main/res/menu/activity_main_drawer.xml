@@ -6,22 +6,18 @@
     <group android:checkableBehavior="single"
         android:theme="@style/ItemTheme">
 
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/importt"
-            android:theme="@style/ItemTheme"/>
+
 
 
 
     </group>
 
-    <item android:title="@string/communicate">
+    <item android:title="@string/profiles">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/share" />
+                android:icon="@drawable/ic_outline_whatshot_24px"
+                android:title="@string/about" />
 
         </menu>
     </item>

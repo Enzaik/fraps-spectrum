@@ -12,14 +12,12 @@
     <string name="title_activity_main2">Main2Activity</string>
 
 
-
     <string name="prof0">Balance</string>
     <string name="prof1">Performance</string>
     <string name="prof2">Battery</string>
     <string name="prof3">Gaming</string>
 
     <string name="nav_header_desc">Navigation header</string>
-
 
 
     <!-- Support Strings -->
@@ -62,7 +60,7 @@
 
 
     <string name="action_example">Example action</string>
-    <string name="communicate">Communicate</string>
+    <string name="profiles">Profiles</string>
     <string name="importt">Import</string>
     <string name="share">Share</string>
     <string name="gallery">Gallery</string>
@@ -73,6 +71,9 @@
     <string name="spectrum_extended">Spectrum Extended</string>
     <string name="vendor">Vendor</string>
     <string name="model">Model</string>
+    <string name="about">About profiles</string>
+    -+
+    -<string name="title_activity_about">About Profiles</string>
 
 
 </resources>

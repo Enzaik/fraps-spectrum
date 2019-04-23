@@ -554,6 +554,8 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         }  else if (id == R.id.nav_share) {
 
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
