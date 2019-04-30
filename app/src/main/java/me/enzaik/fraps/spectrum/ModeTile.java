@@ -82,9 +82,12 @@ public class ModeTile extends TileService {
 
     private void updateTile() {
 
-        suModeResult = Shell.SU.run(String.format("getprop %s", modeSuppProp));
 
-        String mode_sup = listToString(suModeResult);
+
+
+
+
+
         Icon newIcon;
         String newLabel;
         String mode = MultiProcessSharedPreferencesProvider
@@ -95,19 +98,7 @@ public class ModeTile extends TileService {
         int newState = Tile.STATE_ACTIVE;
 
 
-        if(!mode_sup.contains("1")){
 
-            Toast.makeText(getApplicationContext(), "No Mode support", Toast.LENGTH_SHORT).show();
-            newLabel = "No support";
-            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_mono);
-            click = false;
-            tile.setLabel(newLabel);
-            tile.setIcon(newIcon);
-            tile.setState(newState);
-            tile.updateTile();
-            return;
-
-        }
 
 
         //ArrayList<String> disabledProfilesList = new ArrayList<>();
