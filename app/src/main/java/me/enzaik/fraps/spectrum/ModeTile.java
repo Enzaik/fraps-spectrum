@@ -54,12 +54,12 @@ public class ModeTile extends TileService {
             editor.apply();
 
         }
-        if ((isActive || !isActive) && click && !marker) {
+        if (click && !marker) {
             Utils.setMode(2);
 
             editor.putString("mode", "agressive");
             editor.apply();
-        } else if ((isActive || !isActive) && !click && !marker) {
+        } else if ( !click && !marker) {
             Utils.setMode(1);
             editor.putString("mode", "advanced");
             editor.apply();
