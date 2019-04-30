@@ -56,6 +56,23 @@ import static  me.enzaik.fraps.spectrum.Utils.vendorProp;
 import static  me.enzaik.fraps.spectrum.Utils.setProfile;
 import static  me.enzaik.fraps.spectrum.Utils.setMode;
 
+import static me.enzaik.fraps.spectrum.Utils.balanceAuthorProp;
+import static me.enzaik.fraps.spectrum.Utils.balanceNameProp;
+
+import static me.enzaik.fraps.spectrum.Utils.performanceAuthorProp;
+import static me.enzaik.fraps.spectrum.Utils.performanceNameProp;
+
+import static me.enzaik.fraps.spectrum.Utils.batteryAuthorProp;
+import static me.enzaik.fraps.spectrum.Utils.batteryNameProp;
+
+import static me.enzaik.fraps.spectrum.Utils.gamingAuthorProp;
+import static me.enzaik.fraps.spectrum.Utils.gamingNameProp;
+
+import static me.enzaik.fraps.spectrum.Utils.kernelProp;
+import static me.enzaik.fraps.spectrum.Utils.listToString;
+import static me.enzaik.fraps.spectrum.Utils.vendorProp;
+import static me.enzaik.fraps.spectrum.Utils.modelProp;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -115,6 +132,24 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        List<String> kernelName;
+        List<String> phoneModel;
+        List<String> phoneVendor;
+
+        List<String> balanceName;
+        List<String> balanceAuthor;
+
+        List<String> performanceName;
+        List<String> performanceAuthor;
+
+        List<String> batteryName;
+        List<String> batteryAuthor;
+
+        List<String> gamingName;
+        List<String> gamingAuthor;
+
+
+
 
         final CardView card0 = (CardView) findViewById(R.id.card0);
         final CardView card1 = (CardView) findViewById(R.id.card1);
@@ -134,7 +169,36 @@ public class MainActivity extends AppCompatActivity
         final int textWhiteColor = ContextCompat.getColor(this, R.color.colorTextWhite);
         final BottomNavigationItemView nav0 = (BottomNavigationItemView) findViewById(R.id.mode0);
 
+        kernelName = Shell.SU.run("getprop " + kernelProp);
+        phoneModel = Shell.SU.run(String.format("getprop %s", modelProp));
+        phoneVendor = Shell.SU.run(String.format("getprop %s", vendorProp));
+        balanceName = Shell.SU.run(String.format("getprop %s", balanceNameProp));
+        balanceAuthor = Shell.SU.run(String.format("getprop %s", balanceAuthorProp));
 
+        performanceName = Shell.SU.run(String.format("getprop %s", performanceNameProp));
+        performanceAuthor = Shell.SU.run(String.format("getprop %s", performanceAuthorProp));
+
+        batteryName = Shell.SU.run(String.format("getprop %s", batteryNameProp));
+        batteryAuthor = Shell.SU.run(String.format("getprop %s", batteryAuthorProp));
+
+        gamingName = Shell.SU.run(String.format("getprop %s", gamingNameProp));
+        gamingAuthor = Shell.SU.run(String.format("getprop %s", gamingAuthorProp));
+
+        SharedPreferences profileHandler = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = profileHandler.edit();
+
+        editor.putString("kernelName", ((listToString(kernelName) != "") ? listToString(kernelName) : "unknown"));
+        editor.putString("phoneModel", ((listToString(phoneModel) != "") ? listToString(phoneModel) : "unknown"));
+        editor.putString("phoneVendor", ((listToString(phoneVendor) != "") ? listToString(phoneVendor) : "unknown"));
+        editor.putString("balanceName", ((listToString(balanceName) != "") ? listToString(balanceName) : "No info about Balance profile"));
+        editor.putString("balanceAuthor", ((listToString(balanceAuthor) != "") ? "(by " + listToString(balanceAuthor) + ")" : ""));
+        editor.putString("performanceName", ((listToString(performanceName) != "") ? listToString(performanceName) : "No info about Performance profile"));
+        editor.putString("performanceAuthor", ((listToString(performanceAuthor) != "") ? "(by " + listToString(performanceAuthor) + ")" : ""));
+        editor.putString("batteryName", ((listToString(batteryName) != "") ? listToString(batteryName) : "No info about Battery profile"));
+        editor.putString("batteryAuthor", ((listToString(batteryAuthor) != "") ? "(by " + listToString(batteryAuthor) + ")" : ""));
+        editor.putString("gamingName", ((listToString(gamingName) != "") ? listToString(gamingName) : "No info about Gaming profile"));
+        editor.putString("gamingAuthor", ((listToString(gamingAuthor) != "") ? "(by " + listToString(gamingAuthor) + ")" : ""));
+        editor.apply();
 
         // Check for Spectrum Support
         if (!checkSupport(this)) {

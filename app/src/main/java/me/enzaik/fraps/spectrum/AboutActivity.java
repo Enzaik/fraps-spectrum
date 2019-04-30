@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import com.ruesga.preferences.MultiProcessSharedPreferencesProvider;
+
 import java.util.List;
 
 import eu.chainfire.libsuperuser.Shell;
@@ -63,7 +65,7 @@ public class AboutActivity extends AppCompatActivity {
     }
 
     private void getDesc() {
-      List<String> kernelName;
+     /* List<String> kernelName;
       List<String> phoneModel;
       List<String> phoneVendor;
 
@@ -77,7 +79,7 @@ public class AboutActivity extends AppCompatActivity {
       List<String> batteryAuthor;
 
       List<String> gamingName;
-      List<String> gamingAuthor;
+      List<String> gamingAuthor;*/
 
       final TextView kernelTxt = (TextView) findViewById(R.id.kernel_name);
       final TextView phoneModelTxt = (TextView) findViewById(R.id.phone_model);
@@ -88,47 +90,55 @@ public class AboutActivity extends AppCompatActivity {
 
 
 
-        kernelName = Shell.SU.run("getprop " + kernelProp);
-        phoneModel = Shell.SU.run(String.format("getprop %s", modelProp));
-        phoneVendor = Shell.SU.run(String.format("getprop %s", vendorProp));
-        balanceName = Shell.SU.run(String.format("getprop %s", balanceNameProp));
-        balanceAuthor = Shell.SU.run(String.format("getprop %s", balanceAuthorProp));
+        String kernelName = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("kernelName", "");
 
-        performanceName = Shell.SU.run(String.format("getprop %s", performanceNameProp));
-        performanceAuthor = Shell.SU.run(String.format("getprop %s", performanceAuthorProp));
+        String phoneModel = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("phoneModel", "");
 
-        batteryName = Shell.SU.run(String.format("getprop %s", batteryNameProp));
-        batteryAuthor = Shell.SU.run(String.format("getprop %s", batteryAuthorProp));
+        String phoneVendor = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("phoneVendor", "");
 
-        gamingName = Shell.SU.run(String.format("getprop %s", gamingNameProp));
-        gamingAuthor = Shell.SU.run(String.format("getprop %s", gamingAuthorProp));
+        String balanceName = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("balanceName", "");
+        String balanceAuthor = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("balanceAuthor", "");
 
-        if(kernelName != null){
-            kernelTxt.setText(listToString(kernelName));
-        }
-        if(phoneModel != null){
-            phoneModelTxt.setText(listToString(phoneVendor) + " " + listToString(phoneModel));
-        }
+        String performanceName = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("performanceName", "");
+        String performanceAuthor= MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("performanceAuthor", "");
 
-        if(balanceName != null&& listToString(balanceName) != ""){
-            balanceInfoTxt.setText(listToString(balanceName) + " (by " + listToString(balanceAuthor) + ")");
+        String batteryName = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("batteryName", "");
+        String batteryAuthor = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("batteryAuthor", "");
 
-        }
+        String gamingName = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("gamingName", "");
+        String gamingAuthor = MultiProcessSharedPreferencesProvider
+                .getSharedPreferences(getApplicationContext(), "profile")
+                .getString("gamingAuthor", "");
 
-        if(performanceName != null && listToString(performanceName) != ""){
-            performanceInfoTxt.setText(listToString(performanceName) + " (by " + listToString(performanceAuthor) + ")");
 
-        }
 
-        if(batteryName != null && listToString(batteryName) != ""){
-            batteryInfoTxt.setText(listToString(batteryName) + " (by " + listToString(batteryAuthor) + ")");
+        kernelTxt.setText(kernelName);
+        phoneModelTxt.setText((phoneVendor) + " " + (phoneModel));
+        balanceInfoTxt.setText((balanceName) + " " + (balanceAuthor) );
+        performanceInfoTxt.setText((performanceName) +  " " + (performanceAuthor) );
+        batteryInfoTxt.setText((batteryName) + " " + (batteryAuthor));
+        gamingInfoTxt.setText((gamingName) + " " + (gamingAuthor) );
 
-        }
-
-        if(gamingName != null && listToString(gamingName) != ""){
-            gamingInfoTxt.setText(listToString(gamingName) + " (by " + listToString(gamingAuthor) + ")");
-
-        }
 
     }
 
