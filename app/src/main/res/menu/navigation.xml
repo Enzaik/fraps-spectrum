@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/mode0"
-        android:icon="@drawable/ic_outline_local_florist_24px"
+        android:icon="@drawable/ic_outline_filter_1_24px"
         android:title="Secure" />
 
     <item
         android:id="@+id/mode1"
-        android:icon="@drawable/ic_outline_star_rate_18px"
+        android:icon="@drawable/ic_outline_filter_2_24px"
         android:title="Advanced" />
 
     <item
         android:id="@+id/mode2"
-        android:icon="@drawable/ic_outline_offline_bolt_24px"
+        android:icon="@drawable/ic_outline_filter_3_24px"
         android:title="Agressive" />
 
 </menu>

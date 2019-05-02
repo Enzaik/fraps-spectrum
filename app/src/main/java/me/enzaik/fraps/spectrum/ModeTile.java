@@ -107,16 +107,16 @@ public class ModeTile extends TileService {
         // Update tile
         if (mode.contains("2") || mode.contains("agressive") ) {
             newLabel = "Agressive";
-            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_outline_offline_bolt_24px);
+            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_outline_filter_3_24px);
             click = false;
             marker = true;
         } else if (mode.contains("1") || mode.contains("advanced") ){
             newLabel = "Advanced";
-            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_outline_star_rate_18px);
+            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_outline_filter_2_24px);
             click = true;
         } else if (mode.contains("0") || mode.contains("secure")) {
             newLabel = "Secure";
-            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_outline_local_florist_24px);
+            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_outline_filter_1_24px);
             click = false;
             marker = false;
         } else {
