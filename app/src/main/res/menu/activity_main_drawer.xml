@@ -16,7 +16,7 @@
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_outline_whatshot_24px"
+                android:icon="@drawable/ic_outline_account_circle_24px"
                 android:title="@string/about" />
 
         </menu>

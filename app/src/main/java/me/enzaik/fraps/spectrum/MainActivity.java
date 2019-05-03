@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         List<String> kernelName;
         List<String> phoneModel;
         List<String> phoneVendor;
@@ -361,6 +362,7 @@ public class MainActivity extends AppCompatActivity
         if(!mode_sup.contains("1")){
             navigation.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(), "No Mode support", Toast.LENGTH_SHORT).show();
+
 
         }
 
