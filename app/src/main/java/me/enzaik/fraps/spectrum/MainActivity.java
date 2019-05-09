@@ -370,6 +370,7 @@ public class MainActivity extends AppCompatActivity
             suResult = Shell.SU.run(String.format("cat %s", kpmPath));
         } else {
             suResult = Shell.SU.run(String.format("getprop %s", profileProp));
+
             suModeResult = Shell.SU.run(String.format("getprop %s", modeProp));
 
         }
@@ -426,6 +427,15 @@ public class MainActivity extends AppCompatActivity
             }
         }
         //---------init Mode------------
+
+        if(!mode_sup.contains("1")){
+
+            editor.putString("mode", "unsupported");
+            editor.apply();
+            return;
+
+        }
+
         if (suModeResult != null){
             String modeResult = listToString(suModeResult);
             switch (modeResult){

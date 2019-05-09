@@ -2,6 +2,7 @@ package me.enzaik.fraps.spectrum;
 
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Icon;
 import android.os.Build;
@@ -41,12 +42,23 @@ public class ModeTile extends TileService {
     }
 
     private void setMode() {
-        MultiProcessSharedPreferencesProvider.MultiProcessSharedPreferences mode =
-                MultiProcessSharedPreferencesProvider.getSharedPreferences(ModeTile.this, "profile");
-        SharedPreferences.Editor editor = mode.edit();
+       /* MultiProcessSharedPreferencesProvider.MultiProcessSharedPreferences mode =
+                MultiProcessSharedPreferencesProvider.getSharedPreferences(ModeTile.this, "profile");*/
+        SharedPreferences profile = this.getSharedPreferences("profile", Context.MODE_PRIVATE);
+        String mode = profile.getString("mode", "");
+
+        SharedPreferences.Editor editor = profile.edit();
         boolean isActive = getServiceStatus();
 
         // Update tile and set mode
+        if(mode.contains("unsupported")){
+
+            editor.putString("mode", "unsupported");
+            editor.apply();
+            updateTile();
+            return;
+        }
+
         if (marker){
             Utils.setMode(0);
 
@@ -99,7 +111,16 @@ public class ModeTile extends TileService {
 
 
 
+        if(mode.contains("unsupported")){
 
+            newLabel = "No support";
+            newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_mono);
+            tile.setLabel(newLabel);
+            tile.setIcon(newIcon);
+            tile.setState(newState);
+            tile.updateTile();
+            return;
+        }
 
         //ArrayList<String> disabledProfilesList = new ArrayList<>();
        // disabledProfilesList.addAll(Arrays.asList(Utils.disabledProfiles().split(",")));
