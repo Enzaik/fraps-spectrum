@@ -356,7 +356,7 @@ public class MainActivity extends AppCompatActivity
         suModeSupResult = Shell.SU.run(String.format("getprop %s", modeSuppProp));
         suProfileResult = Shell.SU.run(String.format("getprop %s", profileProp));
         if (suProfileResult == null){
-            Shell.SU.run("setprop persist.spectrum.profile 0");
+            Shell.SU.run("setprop persist.vendor.spectrum.profile 0");
         }
         String mode_sup = listToString(suModeSupResult);
         if(!mode_sup.contains("1")){

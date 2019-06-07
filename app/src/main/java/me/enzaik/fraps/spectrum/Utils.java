@@ -25,35 +25,35 @@ class Utils {
 
     public static String  kpmFinal = "/proc/kpm_final";
 
-    public static String profileProp = "persist.spectrum.profile";
+    public static String profileProp = "persist.vendor.spectrum.profile";
 
-    public static String modeProp = "persist.spectrum.mode";
+    public static String modeProp = "persist.vendor.spectrum.mode";
 
-    public static String modeSuppProp = "spectrum.mode.support";
+    public static String modeSuppProp = "vendor.spectrum.mode.support";
 
-    public static String kernelProp = "persist.spectrum.kernel";
+    public static String kernelProp = "persist.vendor.spectrum.kernel";
 
     public static String modelProp = "ro.product.vendor.model";
 
 //--------profile info-----
-    public static String balanceNameProp = "persist.spectrum.balance";
+    public static String balanceNameProp = "persist.vendor.spectrum.balance";
 
-    public static String balanceAuthorProp = "persist.spectrum.balance.author";
-
-
-    public static String performanceNameProp = "persist.spectrum.performance";
-
-    public static String performanceAuthorProp = "persist.spectrum.performance.author";
+    public static String balanceAuthorProp = "persist.vendor.spectrum.balance.author";
 
 
-    public static String batteryNameProp = "persist.spectrum.battery";
+    public static String performanceNameProp = "persist.vendor.spectrum.performance";
 
-    public static String batteryAuthorProp = "persist.spectrum.battery.author";
+    public static String performanceAuthorProp = "persist.vendor.spectrum.performance.author";
 
 
-    public static String gamingNameProp = "persist.spectrum.gaming";
+    public static String batteryNameProp = "persist.vendor.spectrum.battery";
 
-    public static String gamingAuthorProp = "persist.spectrum.gaming.author";
+    public static String batteryAuthorProp = "persist.vendor.spectrum.battery.author";
+
+
+    public static String gamingNameProp = "persist.vendor.spectrum.gaming";
+
+    public static String gamingAuthorProp = "persist.vendor.spectrum.gaming.author";
 
 
 //---------------------------------------------------------------------------
@@ -74,7 +74,7 @@ class Utils {
     // Method to check if kernel supports
     public static boolean checkSupport(final Context context) {
         List<String> shResult;
-        String supportProp = "spectrum.support";
+        String supportProp = "vendor.spectrum.support";
         shResult = Shell.SH.run(String.format("getprop %s", supportProp));
         if(listToString(shResult).isEmpty()){
             shResult = Shell.SU.run(String.format("cat %s", kpmSupport));

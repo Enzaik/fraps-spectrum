@@ -134,7 +134,7 @@ public class ProfileLoaderActivity extends AppCompatActivity{
         new AsyncTask<Object, Object, Void>() {
             @Override
             protected Void doInBackground(Object... params) {
-                Shell.SU.run("setprop persist.spectrum.profile " + profile);
+                Shell.SU.run("setprop persist.vendor.spectrum.profile " + profile);
                 return null;
             }
         }.execute();

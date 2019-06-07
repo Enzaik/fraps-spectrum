@@ -11,6 +11,8 @@ import com.ruesga.preferences.MultiProcessSharedPreferencesProvider;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import static  me.enzaik.fraps.spectrum.Utils.setProfile;
+import static  me.enzaik.fraps.spectrum.Utils.setMode;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class ProfileTile extends TileService {
@@ -79,6 +81,7 @@ public class ProfileTile extends TileService {
         String newLabel;
         int newState = Tile.STATE_ACTIVE;
         ArrayList<String> disabledProfilesList = new ArrayList<>();
+
   //      disabledProfilesList.addAll(Arrays.asList(Utils.disabledProfiles().split(",")));
 
         // Update tile
@@ -86,18 +89,22 @@ public class ProfileTile extends TileService {
             newLabel = "Gaming";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.game);
             click = false;
+           // Utils.setProfile(3);
         } else if (profile.contains("2") || profile.contains("battery") ) {
             newLabel = "Battery";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.battery);
             click = true;
+          //  Utils.setProfile(2);
         } else if (profile.contains("1") || profile.contains("performance") ){
             newLabel = "Performance";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.rocket);
             click = true;
+          //  Utils.setProfile(1);
         } else if (profile.contains("0") || profile.contains("balanced") ) {
             newLabel = "Balance";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.atom);
             click = false;
+           // Utils.setProfile(0);
         } else {
             newLabel = "Custom";
             newIcon = Icon.createWithResource(getApplicationContext(), R.drawable.ic_mono);
